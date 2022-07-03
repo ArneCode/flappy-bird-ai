@@ -5,7 +5,7 @@ let speed = 4
 let points = 0,gen=1
 let num_birds = 50
 let birds = []
-let show_brain=false
+let show_brain=true
 let show_brain_box
 
 function draw_brain(x,y,weights,inputs,outputs){
@@ -13,7 +13,7 @@ function draw_brain(x,y,weights,inputs,outputs){
   fill(255,0,0)
   for(let a=0;a<outputs;a++){
     p2x=100+x
-    p2y=10+30*a+y
+    p2y=50+30*a+y
     noStroke()
     ellipse(p2x,p2y,10,10)
     for(let b=0;b<inputs;b++){
@@ -156,12 +156,14 @@ class brain {
 }
 
 function setup() {
-  createCanvas(400, 400)
+  createCanvas(400, 400).parent("canvas")
   randomSeed(Date.now())
   frameRate(1000)
-  show_brain_box=createCheckbox("Gehirn zeigen?",false)
+  show_brain_box=createCheckbox("Gehirn zeigen?",true)
   show_brain_box.changed(show_brain_event)
+  show_brain_box.parent("canvas")
   game_speed_slider=createSlider(1,100,1)
+  game_speed_slider.parent("canvas")
   s = new säule(width)
   for (let i = 0; i < num_birds; i++) {
     birds[i] = new bird(20, height / 2, 40)
